@@ -302,7 +302,7 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
       #       multiple shared libraries loaded in runtime by python.
       #       This patch fixes a runtime crash when tensorflow is compiled
       #       with clang -O2 on Linux (see https://github.com/tensorflow/tensorflow/issues/8394)
-      patch_file = str(Label("//third_party/protobuf:add_noinlines.patch")),
+      #patch_file = str(Label("//third_party/protobuf:add_noinlines.patch")),
   )
 
   # We need to import the protobuf library under the names com_google_protobuf
