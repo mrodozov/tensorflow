@@ -32,9 +32,9 @@ def _jpeg_src():
 def _jpeg_prefix():
     return  "$LIBJPEG_TURBO_STRIP_PREFIX"
 def _zlib_src():
-    return "$ZLIB_SOURCE"
+    return "https://zlib.net/zlib-1.2.11.tar.gz" #"$ZLIB_SOURCE"
 def _zlib_prefix():
-    return  "$ZLIB_STRIP_PREFIX"
+    return  "zlib-1.2.11"#"$ZLIB_STRIP_PREFIX"
 
 # Sanitize a dependency so that it works correctly from code that includes
 # TensorFlow as a submodule.
