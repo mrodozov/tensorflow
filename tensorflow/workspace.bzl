@@ -28,9 +28,9 @@ def _protobuf_src():
 def _protobuf_prefix():
     return  "$PROTOBUF_STRIP_PREFIX"
 def _jpeg_src():
-    return "$LIBJPEG-TURBO_SOURCE"
+    return "$LIBJPEG_TURBO_SOURCE"
 def _jpeg_prefix():
-    return  "$LIBJPEG-TURBO_STRIP_PREFIX"
+    return  "$LIBJPEG_TURBO_STRIP_PREFIX"
 def _zlib_src():
     return "$ZLIB_SOURCE"
 def _zlib_prefix():
