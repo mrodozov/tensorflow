@@ -93,21 +93,19 @@ def _tf_http_archive(ctx):
           locURLS.append(ctx.os.environ[url[1:]])
        else:
           locURLS.append(url)
-    locPrefixs=[]
-    for px in ctx.attr.strip_prefix:
-       if px.startswith("$"):
-          locPrefixs.append(ctx.os.environ[px[1:]])
-       else:
-          locPrefixs.append(px)
+    locPrefix=ctx.attr.strip_prefix
+    if locPrefix.startswith("$"):
+       locPrefix=ctx.os.environ[locPrefix[1:]]
+
     print("ok here we are")
     print(locURLS)
-    print(locPrefixs)	  
+    print(locPrefix)	  
     ctx.download_and_extract(
         locURLS,#ctx.attr.urls,
         "",
         ctx.attr.sha256,
         ctx.attr.type,
-        locPrefixs)##ctx.attr.strip_prefix)
+        locPrefix)##ctx.attr.strip_prefix)
     if ctx.attr.delete:
       _apply_delete(ctx, ctx.attr.delete)
     if ctx.attr.patch_file != None:
