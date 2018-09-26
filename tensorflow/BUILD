@@ -528,7 +528,7 @@ tf_cc_shared_object(
         "//tensorflow:windows": [],
         "//tensorflow:windows_msvc": [],
         "//conditions:default": [
-            "-z defs",
+            "-z defs", "-lrt",
             "-Wl,--version-script",  #  This line must be directly followed by the version_script.lds file
             "$(location //tensorflow/c:version_script.lds)",
         ],
@@ -548,12 +548,12 @@ tf_cc_shared_object(
     linkopts = select({
         "//tensorflow:darwin": [
             "-Wl,-exported_symbols_list",  # This line must be directly followed by the exported_symbols.lds file
-            "$(location //tensorflow:tf_exported_symbols.lds) -lrt",
+            "$(location //tensorflow:tf_exported_symbols.lds)",
         ],
         "//tensorflow:windows": [],
         "//tensorflow:windows_msvc": [],
         "//conditions:default": [
-            "-z defs",
+            "-z defs", "-lrt",
             "-Wl,--version-script",  #  This line must be directly followed by the version_script.lds file
             "$(location //tensorflow:tf_version_script.lds)",
         ],
