@@ -87,12 +87,24 @@ def _tf_http_archive(ctx):
 
   use_syslib = _use_system_lib(ctx, ctx.attr.name)
   if not use_syslib:
+    locURLS=[]
+    for url in ctx.attr.urls:
+       if url.startswith("$"):
+          locURLS.append(ctx.configuration.default_shell_env[url[1:]])
+       else:
+          locURLS.append(url)
+    locPrefixs=[]
+    for px in ctx.attr.urls:
+       if px.startswith("$"):
+          locPrefixs.append(ctx.configuration.default_shell_env[px[1:]])
+       else:
+          locPrefixs.append(px)
     ctx.download_and_extract(
-        ctx.attr.urls,
+        locURLS,#ctx.attr.urls,
         "",
         ctx.attr.sha256,
         ctx.attr.type,
-        ctx.attr.strip_prefix)
+        locPrefixs)##ctx.attr.strip_prefix)
     if ctx.attr.delete:
       _apply_delete(ctx, ctx.attr.delete)
     if ctx.attr.patch_file != None:

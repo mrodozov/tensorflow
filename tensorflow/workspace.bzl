@@ -19,30 +19,22 @@ load("//tensorflow/tools/def_file_filter:def_file_filter_configure.bzl",
      "def_file_filter_configure")
 
 
-def _eigen_src(ctx):
-    print("eigen src is" + ctx.configuration.default_shell_env['EIGEN_SOURCE'])
-    return ctx.configuration.default_shell_env['EIGEN_SOURCE']
-def _eigen_prefix(ctx):
-    print("eigen prefix is" + ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX'])
-    return  ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX']
-def _protobuf_src(ctx):
-    print("protobuf is" + ctx.configuration.default_shell_env['PROTOBUF_SOURCE'])
-    return ctx.configuration.default_shell_env['PROTOBUF_SOURCE']
-def _protobuf_prefix(ctx):
-    print("protobuf prefix is" + ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX'])
-    return  ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX']
-def _jpeg_src(ctx):
-    print("jpeg src is" + ctx.configuration.default_shell_env['LIBJPEG-TURBO_SOURCE'])
-    return ctx.configuration.default_shell_env['LIBJPEG-TURBO_SOURCE']
-def _jpeg_prefix(ctx):
-    print("jpeg prefix is" + ctx.configuration.default_shell_env['LIBJPEG-TURBO_STRIP_PREFIX'])
-    return  ctx.configuration.default_shell_env['LIBJPEG-TURBO_STRIP_PREFIX']
-def _zlib_src(ctx):
-    print("zlib src is" + ctx.configuration.default_shell_env['ZLIB_SOURCE'])
-    return ctx.configuration.default_shell_env['ZLIB_SOURCE']
-def _zlib_prefix(ctx):
-    print("zlib prefix is" + ctx.configuration.default_shell_env['ZLIB_STRIP_PREFIX'])
-    return  ctx.configuration.default_shell_env['ZLIB_STRIP_PREFIX']
+def _eigen_src():
+    return "$EIGEN_SOURCE"
+def _eigen_prefix():
+    return  "$EIGEN_STRIP_PREFIX"
+def _protobuf_src():
+    return "$PROTOBUF_SOURCE"
+def _protobuf_prefix():
+    return  "$PROTOBUF_STRIP_PREFIX"
+def _jpeg_src():
+    return "$LIBJPEG-TURBO_SOURCE"
+def _jpeg_prefix():
+    return  "$LIBJPEG-TURBO_STRIP_PREFIX"
+def _zlib_src():
+    return "$ZLIB_SOURCE"
+def _zlib_prefix():
+    return  "$ZLIB_STRIP_PREFIX"
 
 # Sanitize a dependency so that it works correctly from code that includes
 # TensorFlow as a submodule.
@@ -136,10 +128,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "eigen_archive",
-      urls = [ _eigen_src
+      urls = [ _eigen_src()
       ],
       sha256 = "",
-      strip_prefix = _eigen_prefix,
+      strip_prefix = _eigen_prefix(),
       build_file = clean_dep("//third_party:eigen.BUILD"),
   )
 
@@ -260,10 +252,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "jpeg",
-      urls = [ _jpeg_src
+      urls = [ _jpeg_src()
       ],
       sha256 = "",
-      strip_prefix = _jpeg_prefix,
+      strip_prefix = _jpeg_prefix(),
       build_file = clean_dep("//third_party/jpeg:jpeg.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:jpeg.BUILD"),
   )
@@ -386,10 +378,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "protobuf_archive",
-      urls = [ _protobuf_src
+      urls = [ _protobuf_src()
       ],
       sha256 = "",
-      strip_prefix = _protobuf_prefix,
+      strip_prefix = _protobuf_prefix(),
   )
 
   # We need to import the protobuf library under the names com_google_protobuf
@@ -397,18 +389,18 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
   # Unfortunately there is no way to alias http_archives at the moment.
   tf_http_archive(
       name = "com_google_protobuf",
-      urls = [ _protobuf_src
+      urls = [ _protobuf_src()
       ],
       sha256 = "",
-      strip_prefix = _protobuf_prefix
+      strip_prefix = _protobuf_prefix()
   )
 
   tf_http_archive(
       name = "com_google_protobuf_cc",
-      urls = [ _protobuf_src
+      urls = [ _protobuf_src()
       ],
       sha256 = "",
-      strip_prefix = _protobuf_prefix,
+      strip_prefix = _protobuf_prefix(),
   )
 
   tf_http_archive(
@@ -549,10 +541,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "zlib_archive",
-      urls = [ _zlib_src
+      urls = [ _zlib_src()
       ],
       sha256 = "",
-      strip_prefix = _zlib_prefix,
+      strip_prefix = _zlib_prefix(),
       build_file = clean_dep("//third_party:zlib.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:zlib.BUILD"),
   )
