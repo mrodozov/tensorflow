@@ -19,6 +19,9 @@ load("//tensorflow/tools/def_file_filter:def_file_filter_configure.bzl",
      "def_file_filter_configure")
 
 
+def _eigen_src(ctx):
+    return ctx.configuration.default_shell_env['EIGEN_SOURCE']
+
 # Sanitize a dependency so that it works correctly from code that includes
 # TensorFlow as a submodule.
 def clean_dep(dep):
@@ -27,7 +30,7 @@ def clean_dep(dep):
 # If TensorFlow is linked as a submodule.
 # path_prefix is no longer used.
 # tf_repo_name is thought to be under consideration.
-def tf_workspace(ctx, path_prefix="", tf_repo_name=""):
+def tf_workspace(path_prefix="", tf_repo_name=""):
   # Note that we check the minimum bazel version in WORKSPACE.
   clang6_configure(name="local_config_clang6")
   cc_download_clang_toolchain(name="local_config_download_clang")
@@ -111,7 +114,7 @@ def tf_workspace(ctx, path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "eigen_archive",
-      urls = [ ctx.configuration.default_shell_env['EIGEN_SOURCE']
+      urls = [ _eigen_src
       ],
       sha256 = "",
       strip_prefix = ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX'],
