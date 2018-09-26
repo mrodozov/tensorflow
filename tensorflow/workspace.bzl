@@ -106,12 +106,15 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
      build_file = clean_dep("//third_party:com_google_absl.BUILD"),
   )
 
+  
+
+
   tf_http_archive(
       name = "eigen_archive",
-      urls = [ @EIGEN_SOURCE@
+      urls = [ env['EIGEN_SOURCE']
       ],
       sha256 = "",
-      strip_prefix = "@EIGEN_STRIP_PREFIX@",
+      strip_prefix = env['EIGEN_STRIP_PREFIX'],
       build_file = clean_dep("//third_party:eigen.BUILD"),
   )
 
@@ -232,10 +235,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "jpeg",
-      urls = [ @JPEG_SOURCE@
+      urls = [ env['LIBJPEG-TURBO_SOURCE']
       ],
       sha256 = "",
-      strip_prefix = "@JPEG_STRIP_PREFIX@",
+      strip_prefix = env['LIBJPEG-TURBO_STRIP_PREFIX'],
       build_file = clean_dep("//third_party/jpeg:jpeg.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:jpeg.BUILD"),
   )
@@ -358,10 +361,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "protobuf_archive",
-      urls = [ @PROTOBUF_SOURCE@
+      urls = [ env['PROTOBUF_SOURCE']
       ],
       sha256 = "",
-      strip_prefix = "@PROTOBUF_STRIP_PREFIX",
+      strip_prefix = env['PROTOBUF_STRIP_PREFIX'],
   )
 
   # We need to import the protobuf library under the names com_google_protobuf
@@ -369,18 +372,18 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
   # Unfortunately there is no way to alias http_archives at the moment.
   tf_http_archive(
       name = "com_google_protobuf",
-      urls = [ @PROTOBUF_SOURCE@
+      urls = [ env['PROTOBUF_SOURCE']
       ],
       sha256 = "",
-      strip_prefix = "@PROTOBUF_STRIP_PREFIX@",
+      strip_prefix = env['PROTOBUF_STRIP_PREFIX'],
   )
 
   tf_http_archive(
       name = "com_google_protobuf_cc",
-      urls = [ @PROTOBUF_SOURCE@
+      urls = [ env['PROTOBUF_SOURCE']
       ],
       sha256 = "",
-      strip_prefix = "@PROTOBUF_STRIP_PREFIX@",
+      strip_prefix = env['PROTOBUF_STRIP_PREFIX'],
   )
 
   tf_http_archive(
@@ -521,10 +524,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "zlib_archive",
-      urls = [ @ZLIB_SOURCE@
+      urls = [ env['ZLIB_SOURCE']
       ],
       sha256 = "",
-      strip_prefix = "@ZLIB_STRIP_PREFIX@",
+      strip_prefix = env['ZLIB_STRIP_PREFIX'],
       build_file = clean_dep("//third_party:zlib.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:zlib.BUILD"),
   )
