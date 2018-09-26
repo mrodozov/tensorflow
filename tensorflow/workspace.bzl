@@ -20,27 +20,28 @@ load("//tensorflow/tools/def_file_filter:def_file_filter_configure.bzl",
 
 
 def _eigen_src(ctx):
-    print("src is" + ctx.configuration.default_shell_env['EIGEN_SOURCE'])
+    print("eigen src is" + ctx.configuration.default_shell_env['EIGEN_SOURCE'])
     return ctx.configuration.default_shell_env['EIGEN_SOURCE']
 def _eigen_prefix(ctx):
-    print("src is" + ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX'])
+    print("eigen prefix is" + ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX'])
     return  ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX']
 def _protobuf_src(ctx):
-    print("src is" + ctx.configuration.default_shell_env['PROTOBUF_SOURCE'])
+    print("protobuf is" + ctx.configuration.default_shell_env['PROTOBUF_SOURCE'])
     return ctx.configuration.default_shell_env['PROTOBUF_SOURCE']
 def _protobuf_prefix(ctx):
+    print("protobuf prefix is" + ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX'])
     return  ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX']
 def _jpeg_src(ctx):
-    print("src is" + ctx.configuration.default_shell_env['LIBJPEG-TURBO_SOURCE'])
+    print("jpeg src is" + ctx.configuration.default_shell_env['LIBJPEG-TURBO_SOURCE'])
     return ctx.configuration.default_shell_env['LIBJPEG-TURBO_SOURCE']
 def _jpeg_prefix(ctx):
-    print("src is" + ctx.configuration.default_shell_env['LIBJPEG-TURBO_STRIP_PREFIX'])
+    print("jpeg prefix is" + ctx.configuration.default_shell_env['LIBJPEG-TURBO_STRIP_PREFIX'])
     return  ctx.configuration.default_shell_env['LIBJPEG-TURBO_STRIP_PREFIX']
 def _zlib_src(ctx):
-    print("src is" + ctx.configuration.default_shell_env['ZLIB_SOURCE'])
+    print("zlib src is" + ctx.configuration.default_shell_env['ZLIB_SOURCE'])
     return ctx.configuration.default_shell_env['ZLIB_SOURCE']
 def _zlib_prefix(ctx):
-    print("src is" + ctx.configuration.default_shell_env['ZLIB_STRIP_PREFIX'])
+    print("zlib prefix is" + ctx.configuration.default_shell_env['ZLIB_STRIP_PREFIX'])
     return  ctx.configuration.default_shell_env['ZLIB_STRIP_PREFIX']
 
 # Sanitize a dependency so that it works correctly from code that includes
