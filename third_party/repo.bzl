@@ -99,6 +99,9 @@ def _tf_http_archive(ctx):
           locPrefixs.append(ctx.os.environ[px[1:]])
        else:
           locPrefixs.append(px)
+    print("ok here we are")
+    print(locURLS)
+    print(locPrefixs)	  
     ctx.download_and_extract(
         locURLS,#ctx.attr.urls,
         "",
