@@ -21,6 +21,20 @@ load("//tensorflow/tools/def_file_filter:def_file_filter_configure.bzl",
 
 def _eigen_src(ctx):
     return ctx.configuration.default_shell_env['EIGEN_SOURCE']
+def _eigen_prefix(ctx):
+    return  ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX']
+def _protobuf_src(ctx):
+    return ctx.configuration.default_shell_env['PROTOBUF_SOURCE']
+def _protobuf_prefix(ctx):
+    return  ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX']
+def _jpeg_src(ctx):
+    return ctx.configuration.default_shell_env['LIBJPEG-TURBO_SOURCE']
+def _jpeg_prefix(ctx):
+    return  ctx.configuration.default_shell_env['LIBJPEG-TURBO_STRIP_PREFIX']
+def _zlib_src(ctx):
+    return ctx.configuration.default_shell_env['ZLIB_SOURCE']
+def _zlib_prefix(ctx):
+    return  ctx.configuration.default_shell_env['ZLIB_STRIP_PREFIX']
 
 # Sanitize a dependency so that it works correctly from code that includes
 # TensorFlow as a submodule.
@@ -117,7 +131,7 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
       urls = [ _eigen_src
       ],
       sha256 = "",
-      strip_prefix = ctx.configuration.default_shell_env['EIGEN_STRIP_PREFIX'],
+      strip_prefix = _eigen_prefix,
       build_file = clean_dep("//third_party:eigen.BUILD"),
   )
 
@@ -238,10 +252,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "jpeg",
-      urls = [ ctx.configuration.default_shell_env['LIBJPEG-TURBO_SOURCE']
+      urls = [ _jpeg_src
       ],
       sha256 = "",
-      strip_prefix = ctx.configuration.default_shell_env['LIBJPEG-TURBO_STRIP_PREFIX'],
+      strip_prefix = _jpeg_prefix,
       build_file = clean_dep("//third_party/jpeg:jpeg.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:jpeg.BUILD"),
   )
@@ -364,10 +378,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "protobuf_archive",
-      urls = [ ctx.configuration.default_shell_env['PROTOBUF_SOURCE']
+      urls = [ _protobuf_src
       ],
       sha256 = "",
-      strip_prefix = ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX'],
+      strip_prefix = _protobuf_prefix,
   )
 
   # We need to import the protobuf library under the names com_google_protobuf
@@ -375,18 +389,18 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
   # Unfortunately there is no way to alias http_archives at the moment.
   tf_http_archive(
       name = "com_google_protobuf",
-      urls = [ ctx.configuration.default_shell_env['PROTOBUF_SOURCE']
+      urls = [ _protobuf_src
       ],
       sha256 = "",
-      strip_prefix = ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX'],
+      strip_prefix = _protobuf_prefix
   )
 
   tf_http_archive(
       name = "com_google_protobuf_cc",
-      urls = [ ctx.configuration.default_shell_env['PROTOBUF_SOURCE']
+      urls = [ _protobuf_src
       ],
       sha256 = "",
-      strip_prefix = ctx.configuration.default_shell_env['PROTOBUF_STRIP_PREFIX'],
+      strip_prefix = _protobuf_prefix,
   )
 
   tf_http_archive(
@@ -527,10 +541,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "zlib_archive",
-      urls = [ ctx.configuration.default_shell_env['ZLIB_SOURCE']
+      urls = [ _zlib_src
       ],
       sha256 = "",
-      strip_prefix = ctx.configuration.default_shell_env['ZLIB_STRIP_PREFIX'],
+      strip_prefix = _zlib_prefix
       build_file = clean_dep("//third_party:zlib.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:zlib.BUILD"),
   )
