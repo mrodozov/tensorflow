@@ -27,7 +27,7 @@ def clean_dep(dep):
 # If TensorFlow is linked as a submodule.
 # path_prefix is no longer used.
 # tf_repo_name is thought to be under consideration.
-def tf_workspace(path_prefix="", tf_repo_name=""):
+def tf_workspace(ctx, path_prefix="", tf_repo_name=""):
   # Note that we check the minimum bazel version in WORKSPACE.
   clang6_configure(name="local_config_clang6")
   cc_download_clang_toolchain(name="local_config_download_clang")

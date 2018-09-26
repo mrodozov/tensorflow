@@ -28,7 +28,7 @@ load("@local_config_android//:android.bzl", "android_workspace")
 android_workspace()
 
 # Please add all new TensorFlow dependencies in workspace.bzl.
-tf_workspace()
+tf_workspace(ctx)
 
 new_http_archive(
     name = "inception_v1",
