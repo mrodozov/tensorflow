@@ -544,7 +544,7 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
       urls = [ _zlib_src
       ],
       sha256 = "",
-      strip_prefix = _zlib_prefix
+      strip_prefix = _zlib_prefix,
       build_file = clean_dep("//third_party:zlib.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:zlib.BUILD"),
   )
