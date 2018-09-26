@@ -94,7 +94,7 @@ def _tf_http_archive(ctx):
        else:
           locURLS.append(url)
     locPrefixs=[]
-    for px in ctx.attr.urls:
+    for px in ctx.attr.strip_prefix:
        if px.startswith("$"):
           locPrefixs.append(ctx.os.environ[px[1:]])
        else:
