@@ -108,12 +108,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "eigen_archive",
-      urls = [
-          "https://mirror.bazel.build/bitbucket.org/eigen/eigen/get/fd6845384b86.tar.gz",
-          "https://bitbucket.org/eigen/eigen/get/fd6845384b86.tar.gz",
+      urls = [ @EIGEN_SOURCE@
       ],
-      sha256 = "d956415d784fa4e42b6a2a45c32556d6aec9d0a3d8ef48baee2522ab762556a9",
-      strip_prefix = "eigen-eigen-fd6845384b86",
+      sha256 = "",
+      strip_prefix = "@EIGEN_STRIP_PREFIX@",
       build_file = clean_dep("//third_party:eigen.BUILD"),
   )
 
@@ -234,12 +232,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "jpeg",
-      urls = [
-          "https://mirror.bazel.build/github.com/libjpeg-turbo/libjpeg-turbo/archive/1.5.3.tar.gz",
-          "https://github.com/libjpeg-turbo/libjpeg-turbo/archive/1.5.3.tar.gz",
+      urls = [ @JPEG_SOURCE@
       ],
-      sha256 = "1a17020f859cb12711175a67eab5c71fc1904e04b587046218e36106e07eabde",
-      strip_prefix = "libjpeg-turbo-1.5.3",
+      sha256 = "",
+      strip_prefix = "@JPEG_STRIP_PREFIX@",
       build_file = clean_dep("//third_party/jpeg:jpeg.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:jpeg.BUILD"),
   )
@@ -362,12 +358,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "protobuf_archive",
-      urls = [
-          "https://mirror.bazel.build/github.com/google/protobuf/archive/v3.6.0.tar.gz",
-          "https://github.com/google/protobuf/archive/v3.6.0.tar.gz",
+      urls = [ @PROTOBUF_SOURCE@
       ],
-      sha256 = "50a5753995b3142627ac55cfd496cebc418a2e575ca0236e29033c67bd5665f4",
-      strip_prefix = "protobuf-3.6.0",
+      sha256 = "",
+      strip_prefix = "@PROTOBUF_STRIP_PREFIX",
   )
 
   # We need to import the protobuf library under the names com_google_protobuf
@@ -375,22 +369,18 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
   # Unfortunately there is no way to alias http_archives at the moment.
   tf_http_archive(
       name = "com_google_protobuf",
-      urls = [
-          "https://mirror.bazel.build/github.com/google/protobuf/archive/v3.6.0.tar.gz",
-          "https://github.com/google/protobuf/archive/v3.6.0.tar.gz",
+      urls = [ @PROTOBUF_SOURCE@
       ],
-      sha256 = "50a5753995b3142627ac55cfd496cebc418a2e575ca0236e29033c67bd5665f4",
-      strip_prefix = "protobuf-3.6.0",
+      sha256 = "",
+      strip_prefix = "@PROTOBUF_STRIP_PREFIX@",
   )
 
   tf_http_archive(
       name = "com_google_protobuf_cc",
-      urls = [
-          "https://mirror.bazel.build/github.com/google/protobuf/archive/v3.6.0.tar.gz",
-          "https://github.com/google/protobuf/archive/v3.6.0.tar.gz",
+      urls = [ @PROTOBUF_SOURCE@
       ],
-      sha256 = "50a5753995b3142627ac55cfd496cebc418a2e575ca0236e29033c67bd5665f4",
-      strip_prefix = "protobuf-3.6.0",
+      sha256 = "",
+      strip_prefix = "@PROTOBUF_STRIP_PREFIX@",
   )
 
   tf_http_archive(
@@ -531,12 +521,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
 
   tf_http_archive(
       name = "zlib_archive",
-      urls = [
-          "https://mirror.bazel.build/zlib.net/zlib-1.2.11.tar.gz",
-          "https://zlib.net/zlib-1.2.11.tar.gz",
+      urls = [ @ZLIB_SOURCE@
       ],
-      sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",
-      strip_prefix = "zlib-1.2.11",
+      sha256 = "",
+      strip_prefix = "@ZLIB_STRIP_PREFIX@",
       build_file = clean_dep("//third_party:zlib.BUILD"),
       system_build_file = clean_dep("//third_party/systemlibs:zlib.BUILD"),
   )

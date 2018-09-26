@@ -391,7 +391,7 @@ def tf_gen_op_wrapper_cc(name,
   tf_cc_binary(
       name=tool,
       copts=tf_copts(),
-      linkopts=if_not_windows(["-lm"]),
+      linkopts=if_not_windows(["-lm", "-lrt"]),
       linkstatic=1,  # Faster to link this one-time-use binary dynamically
       deps=[op_gen] + deps)
 
@@ -560,7 +560,7 @@ def tf_gen_op_wrapper_py(name,
     deps = [str(Label("//tensorflow/core:" + name + "_op_lib"))]
   tf_cc_binary(
       name=tool_name,
-      linkopts=if_not_windows(["-lm"]) + cc_linkopts,
+      linkopts=if_not_windows(["-lm", "-lrt"]) + cc_linkopts,
       copts=tf_copts(),
       linkstatic=1,  # Faster to link this one-time-use binary dynamically
       deps=([
@@ -662,11 +662,11 @@ def tf_cc_test(name,
         clean_dep("//tensorflow:windows"): [],
         clean_dep("//tensorflow:windows_msvc"): [],
         clean_dep("//tensorflow:darwin"): [
-            "-lm",
+            "-lm", "-lrt",
         ],
         "//conditions:default": [
             "-lpthread",
-            "-lm"
+            "-lm", "-lrt"
         ],
       }) + linkopts + _rpath_linkopts(name),
       deps=deps + if_mkl(
@@ -785,7 +785,7 @@ def tf_cuda_only_cc_test(name,
       deps=deps + if_cuda([
           clean_dep("//tensorflow/core:cuda"),
           clean_dep("//tensorflow/core:gpu_lib")]),
-      linkopts=if_not_windows(["-lpthread", "-lm"]) + linkopts + _rpath_linkopts(name),
+      linkopts=if_not_windows(["-lpthread", "-lm","-lrt"]) + linkopts + _rpath_linkopts(name),
       linkstatic=linkstatic or select({
           # cc_tests with ".so"s in srcs incorrectly link on Darwin
           # unless linkstatic=1.
@@ -845,7 +845,7 @@ def tf_cc_test_mkl(srcs,
         clean_dep("//tensorflow:windows_msvc"): [],
         "//conditions:default": [
             "-lpthread",
-            "-lm"
+            "-lm","-lrt"
         ],
       }) + _rpath_linkopts(src_to_test_name(src)),
       deps=deps + if_mkl(
@@ -1140,6 +1140,7 @@ def _py_wrap_cc_impl(ctx):
   args += [src.path]
   outputs = [ctx.outputs.cc_out, ctx.outputs.py_out]
   ctx.action(
+      use_default_shell_env = True,
       executable=ctx.executable._swig,
       arguments=args,
       inputs=list(inputs),
@@ -1352,7 +1353,7 @@ def tf_custom_op_library(name, srcs=[], gpu_srcs=[], deps=[], linkopts=[]):
       features = ["windows_export_all_symbols"],
       linkopts=linkopts + select({
           "//conditions:default": [
-              "-lm",
+              "-lm","-lrt"
           ],
           clean_dep("//tensorflow:windows"): [],
           clean_dep("//tensorflow:windows_msvc"): [],
