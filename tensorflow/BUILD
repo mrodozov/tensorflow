@@ -548,7 +548,7 @@ tf_cc_shared_object(
     linkopts = select({
         "//tensorflow:darwin": [
             "-Wl,-exported_symbols_list",  # This line must be directly followed by the exported_symbols.lds file
-            "$(location //tensorflow:tf_exported_symbols.lds)",
+            "$(location //tensorflow:tf_exported_symbols.lds) -lrt",
         ],
         "//tensorflow:windows": [],
         "//tensorflow:windows_msvc": [],
