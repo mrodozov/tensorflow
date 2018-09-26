@@ -90,13 +90,13 @@ def _tf_http_archive(ctx):
     locURLS=[]
     for url in ctx.attr.urls:
        if url.startswith("$"):
-          locURLS.append(ctx.configuration.default_shell_env[url[1:]])
+          locURLS.append(ctx.os.environ[url[1:]])
        else:
           locURLS.append(url)
     locPrefixs=[]
     for px in ctx.attr.urls:
        if px.startswith("$"):
-          locPrefixs.append(ctx.configuration.default_shell_env[px[1:]])
+          locPrefixs.append(ctx.os.environ[px[1:]])
        else:
           locPrefixs.append(px)
     ctx.download_and_extract(
