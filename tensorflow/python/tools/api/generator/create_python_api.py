@@ -24,8 +24,7 @@ import importlib
 import os
 import sys
 
-#hack
-#from tensorflow.python.tools.api.generator import doc_srcs
+from tensorflow.python.tools.api.generator import doc_srcs
 from tensorflow.python.util import tf_decorator
 from tensorflow.python.util import tf_export
 
