@@ -72,8 +72,6 @@ build --define=use_fast_cpp_protos=true
 build --define=allow_oversize_protos=true
 build --define=grpc_no_ares=true
 
-build:noaws --define=no_aws_support=true
-
 build --spawn_strategy=standalone
 build --genrule_strategy=standalone
 build -c opt
