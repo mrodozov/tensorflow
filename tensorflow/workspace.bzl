@@ -378,7 +378,7 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
         },
     )
 
-    PROTOBUF_URLS = [_protobuf_src()]
+    PROTOBUF_URLS = _protobuf_src()
     PROTOBUF_SHA256 = ""
     PROTOBUF_STRIP_PREFIX = _protobuf_prefix()
 
