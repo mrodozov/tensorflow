@@ -32,6 +32,23 @@ load("//third_party/kissfft:workspace.bzl", kissfft = "repo")
 load("//third_party/keras_applications_archive:workspace.bzl", keras_applications = "repo")
 load("//third_party/pasta:workspace.bzl", pasta = "repo")
 
+def _eigen_src():
+    return "$EIGEN_SOURCE"
+def _eigen_prefix():
+    return  "$EIGEN_STRIP_PREFIX"
+def _protobuf_src():
+    return "$PROTOBUF_SOURCE"
+def _protobuf_prefix():
+    return  "$PROTOBUF_STRIP_PREFIX"
+def _jpeg_src():
+    return "$LIBJPEG_TURBO_SOURCE"
+def _jpeg_prefix():
+    return  "$LIBJPEG_TURBO_STRIP_PREFIX"
+def _zlib_src():
+    return "https://zlib.net/zlib-1.2.11.tar.gz" #"$ZLIB_SOURCE"
+def _zlib_prefix():
+    return  "zlib-1.2.11"#"$ZLIB_STRIP_PREFIX"
+
 def initialize_third_party():
     """ Load third party repositories.  See above load() statements. """
     aws()
@@ -140,11 +157,10 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
     tf_http_archive(
         name = "eigen_archive",
         build_file = clean_dep("//third_party:eigen.BUILD"),
-        sha256 = "df54d805573871d03aaef6d27d45439c18ff6e8db215a3b922b2daefd6914147",
-        strip_prefix = "eigen-eigen-ad3bcd81cc49",
+        sha256 = "",
+        strip_prefix = "_eigen_prefix",
         urls = [
-            "https://mirror.bazel.build/bitbucket.org/eigen/eigen/get/ad3bcd81cc49.tar.gz",
-            "https://bitbucket.org/eigen/eigen/get/ad3bcd81cc49.tar.gz",
+            _eigen_src()
         ],
     )
 
@@ -362,12 +378,9 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
         },
     )
 
-    PROTOBUF_URLS = [
-        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.6.1.2.tar.gz",
-        "https://github.com/protocolbuffers/protobuf/archive/v3.6.1.2.tar.gz",
-    ]
-    PROTOBUF_SHA256 = "2244b0308846bb22b4ff0bcc675e99290ff9f1115553ae9671eba1030af31bc0"
-    PROTOBUF_STRIP_PREFIX = "protobuf-3.6.1.2"
+    PROTOBUF_URLS = [_protobuf_src()]
+    PROTOBUF_SHA256 = ""
+    PROTOBUF_STRIP_PREFIX = _protobuf_prefix()
 
     tf_http_archive(
         name = "protobuf_archive",
@@ -559,12 +572,9 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
         name = "zlib_archive",
         build_file = clean_dep("//third_party:zlib.BUILD"),
         sha256 = "c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1",
-        strip_prefix = "zlib-1.2.11",
+        strip_prefix = _zlib_prefix(),
         system_build_file = clean_dep("//third_party/systemlibs:zlib.BUILD"),
-        urls = [
-            "https://mirror.bazel.build/zlib.net/zlib-1.2.11.tar.gz",
-            "https://zlib.net/zlib-1.2.11.tar.gz",
-        ],
+        urls = [_zlib_src()],
     )
 
     tf_http_archive(
