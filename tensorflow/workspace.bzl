@@ -390,7 +390,7 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
         system_link_files = {
             "//third_party/systemlibs:protobuf.bzl": "protobuf.bzl",
         },
-        urls = PROTOBUF_URLS,
+        urls = [PROTOBUF_URLS],
     )
 
     # We need to import the protobuf library under the names com_google_protobuf
