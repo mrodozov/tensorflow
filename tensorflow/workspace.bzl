@@ -37,7 +37,7 @@ def _eigen_src():
 def _eigen_prefix():
     return  "$EIGEN_STRIP_PREFIX"
 def _protobuf_src():
-    return "$PROTOBUF_SOURCE"
+    return "https://github.com/google/protobuf/archive/v%{realversion}.tar.gz"
 def _protobuf_prefix():
     return  "$PROTOBUF_STRIP_PREFIX"
 def _jpeg_src():
