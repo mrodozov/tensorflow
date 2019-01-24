@@ -483,7 +483,7 @@ def tf_gen_op_wrapper_cc(
     tf_cc_binary(
         name = tool,
         copts = tf_copts(),
-        linkopts = if_not_windows(["-lm", "-Wl,-ldl", "lrt"]),
+        linkopts = if_not_windows(["-lm", "-Wl,-ldl", "-lrt"]),
         linkstatic = 1,  # Faster to link this one-time-use binary dynamically
         deps = [op_gen] + deps,
     )
@@ -773,7 +773,7 @@ def tf_cc_test(
             ],
             clean_dep("//tensorflow:windows"): [],
             clean_dep("//tensorflow:darwin"): [
-                "-lm","lrt",
+                "-lm","-lrt",
             ],
             "//conditions:default": [
                 "-lpthread",
