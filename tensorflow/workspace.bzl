@@ -141,8 +141,8 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
         name = "eigen_archive",
         build_file = clean_dep("//third_party:eigen.BUILD"),
         sha256 = "",
-        strip_prefix = "eigen-git-mirror-048d9eab8d955d2e0b33db99639416eb43a5c628",
-        urls = ["https://github.com/cms-externals/eigen-git-mirror/archive/048d9eab8d955d2e0b33db99639416eb43a5c628.tar.gz"],
+        strip_prefix = "eigen-git-mirror-c9f748adbc827fbcbd71b19e52ab7134c587396e",
+        urls = ["https://github.com/cms-externals/eigen-git-mirror/archive/c9f748adbc827fbcbd71b19e52ab7134c587396e.tar.gz"],
    )
 
     tf_http_archive(
