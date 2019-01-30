@@ -650,7 +650,7 @@ def tf_gen_op_wrapper_py(
     tf_cc_binary(
         name = tool_name,
         copts = tf_copts(),
-        linkopts = if_not_windows(["-lm", "-Wl,-ldl"]) + cc_linkopts,
+        linkopts = if_not_windows(["-lm", "-Wl,-ldl","-lrt"]) + cc_linkopts,
         linkstatic = 1,  # Faster to link this one-time-use binary dynamically
         visibility = [clean_dep("//tensorflow:internal")],
         deps = ([
@@ -764,7 +764,7 @@ def tf_cc_test(
             ],
             "//conditions:default": [
                 "-lpthread",
-                "-lm",
+                "-lm","-lrt",
             ],
         }) + linkopts + _rpath_linkopts(name),
         deps = deps + tf_binary_dynamic_kernel_deps(kernels) + if_mkl_ml(
@@ -899,7 +899,7 @@ def tf_cuda_only_cc_test(
         ]) + if_rocm_is_configured([
             clean_dep("//tensorflow/core:gpu_lib"),
         ]),
-        linkopts = if_not_windows(["-lpthread", "-lm"]) + linkopts + _rpath_linkopts(name),
+        linkopts = if_not_windows(["-lpthread", "-lm", "-lrt"]) + linkopts + _rpath_linkopts(name),
         linkstatic = linkstatic or select({
             # cc_tests with ".so"s in srcs incorrectly link on Darwin
             # unless linkstatic=1.
@@ -966,7 +966,7 @@ def tf_cc_test_mkl(
                 clean_dep("//tensorflow:windows"): [],
                 "//conditions:default": [
                     "-lpthread",
-                    "-lm",
+                    "-lm","-lrt"
                 ],
             }) + _rpath_linkopts(src_to_test_name(src)),
             deps = deps + tf_binary_dynamic_kernel_deps(kernels) + mkl_deps(),
@@ -1545,7 +1545,7 @@ def tf_custom_op_library(name, srcs = [], gpu_srcs = [], deps = [], linkopts = [
         features = ["windows_export_all_symbols"],
         linkopts = linkopts + select({
             "//conditions:default": [
-                "-lm",
+                "-lm","-lrt"
             ],
             clean_dep("//tensorflow:windows"): [],
             clean_dep("//tensorflow:darwin"): [],

@@ -136,11 +136,11 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
     tf_http_archive(
         name = "eigen_archive",
         build_file = clean_dep("//third_party:eigen.BUILD"),
-        sha256 = "753fbb58d0a49b6bcbcfb126ebfa2e21fc97f7471529ba835a096008ce588d8a",
-        strip_prefix = "eigen-eigen-9f48e814419e",
+        sha256 = "",
+        strip_prefix = "eigen-git-mirror-e4c107b451c52c9ab2d7b7fa4194ee35332916ec",
         urls = [
-            "https://mirror.bazel.build/bitbucket.org/eigen/eigen/get/9f48e814419e.tar.gz",
-            "https://bitbucket.org/eigen/eigen/get/9f48e814419e.tar.gz",
+            "https://github.com/cms-externals/eigen-git-mirror/archive/eigen-git-mirror-e4c107b451c52c9ab2d7b7fa4194ee35332916ec.tar.gz",
+            "https://github.com/cms-externals/eigen-git-mirror/archive/eigen-git-mirror-e4c107b451c52c9ab2d7b7fa4194ee35332916ec.tar.gz",
         ],
     )
 
@@ -349,11 +349,11 @@ def tf_workspace(path_prefix = "", tf_repo_name = ""):
     )
 
     PROTOBUF_URLS = [
-        "https://mirror.bazel.build/github.com/protocolbuffers/protobuf/archive/v3.6.1.2.tar.gz",
-        "https://github.com/protocolbuffers/protobuf/archive/v3.6.1.2.tar.gz",
+        "https://github.com/google/protobuf/archive/v3.5.2.tar.gz",
+        "https://github.com/google/protobuf/archive/v3.5.2.tar.gz",
     ]
-    PROTOBUF_SHA256 = "2244b0308846bb22b4ff0bcc675e99290ff9f1115553ae9671eba1030af31bc0"
-    PROTOBUF_STRIP_PREFIX = "protobuf-3.6.1.2"
+    PROTOBUF_SHA256 = ""
+    PROTOBUF_STRIP_PREFIX = "protobuf-3.5.2"
 
     tf_http_archive(
         name = "protobuf_archive",
