@@ -232,10 +232,10 @@ def tf_workspace(path_prefix="", tf_repo_name=""):
   tf_http_archive(
       name = "png_archive",
       urls = [
-          "https://github.com/glennrp/libpng/archive/v1.6.35.tar.gz",
+          "https://github.com/glennrp/libpng/archive/v1.6.37.tar.gz",
       ],
       sha256 = "",
-      strip_prefix = "libpng-1.6.35",
+      strip_prefix = "libpng-1.6.37",
       build_file = str(Label("//third_party:png.BUILD")),
   )
 
